@@ -4,7 +4,7 @@ A full-stack web application built during the **NextByte Studio Full-Stack Web D
 
 **Intern:** Abdul Malik
 **Track:** Full-Stack Web Development
-**Current status:** Week 1 — Planning & Repository Setup ✅
+**Current status:** Week 2 — Frontend Foundation ✅
 
 ---
 
@@ -144,7 +144,7 @@ nextbyte-fullstack-internship/
 | Week | Task | Status |
 |---|---|---|
 | 1 | Planning & repository setup | ✅ This week |
-| 2 | Frontend foundation (UI, components, demo data) | ⏳ |
+| 2 | Frontend foundation (UI, components, demo data) | ✅ Done |
 | 3 | Backend API (endpoints, validation, error handling) | ⏳ |
 | 4 | Database & full CRUD | ⏳ |
 | 5 | Connect frontend & backend | ⏳ |
@@ -152,9 +152,46 @@ nextbyte-fullstack-internship/
 | 7 | Deployment & integration | ⏳ |
 | 8 | Final release (README, demo, screenshots) | ⏳ |
 
-## 10. How to Run (from Week 2 onward)
+## 10. Week 2 — Frontend Foundation ✅
 
-Setup and run instructions will be added as the client and server are built in Weeks 2–4.
+Built the complete StockTrack frontend in `client/` (React + Vite, plain CSS):
+
+- **Pages** — Dashboard (stat cards + needs-attention list), Products (search by name/SKU + category filter), Add/Edit Product form, Low-Stock Alerts table
+- **Reusable components** — `Navbar`, `ProductCard`, `LowStockBadge`, `SearchBar`, `StatCard`
+- **Demo data** — 8 kiryana products in `client/src/data/demoProducts.js`, matching the Product entity in section 5. Status is computed, never stored: quantity 0 → *Out of Stock*, quantity ≤ lowStockLimit → *Low Stock*, otherwise *In Stock* (`client/src/utils/stockStatus.js`)
+- **Add/Edit/Delete** work against the in-memory demo data (no backend yet — the API arrives in Week 3)
+- **Product photos** — real photo files in `client/src/assets/`, imported in code, one per product (sources and licences listed in `client/src/assets/README.txt`)
+- **Responsive** — layout works on desktop and down to 360px phone width
+
+Client folder structure:
+
+```
+client/
+├── index.html
+├── vite.config.js
+└── src/
+    ├── main.jsx / App.jsx      ← entry + page state & navigation
+    ├── index.css               ← all styling (plain CSS)
+    ├── data/demoProducts.js    ← demo products + categories
+    ├── utils/stockStatus.js    ← computed stock status helpers
+    ├── components/             ← Navbar, ProductCard, LowStockBadge, SearchBar, StatCard
+    ├── pages/                  ← Dashboard, Products, ProductForm, LowStock
+    └── assets/                 ← product photos (imported by demoProducts.js)
+```
+
+## 11. How to Run
+
+Frontend (Week 2):
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Then open the local URL Vite prints (usually http://localhost:5173).
+
+Backend setup/run instructions will be added in Weeks 3–4.
 
 ---
 
