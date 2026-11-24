@@ -1,0 +1,462 @@
+/* StockTrack — plain CSS, no framework.
+   Layout: top navbar + centred page column.
+   Responsive: grids collapse and the navbar wraps on small screens,
+   down to 360px phone width. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6f8;
+  color: #1f2933;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #14532d;
+  padding: 12px 20px;
+}
+
+.navbar-brand {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  color: #d1fae5;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background: #166534;
+  color: #ffffff;
+}
+
+.nav-link-active {
+  background: #ffffff;
+  color: #14532d;
+  font-weight: 600;
+}
+
+.nav-count {
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 6px;
+}
+
+/* ---------- Page layout ---------- */
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.page-title {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.page-subtitle {
+  margin: 0 0 20px;
+  color: #52606d;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  margin: 28px 0 12px;
+  font-size: 20px;
+}
+
+.empty-text {
+  color: #52606d;
+  background: #ffffff;
+  border: 1px dashed #cbd2d9;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  background: #14532d;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #166534;
+}
+
+.btn-secondary {
+  background: #e4e7eb;
+  color: #1f2933;
+}
+
+.btn-secondary:hover {
+  background: #cbd2d9;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-danger {
+  background: #b91c1c;
+}
+
+.btn-danger:hover {
+  background: #991b1b;
+}
+
+/* ---------- Dashboard stat cards ---------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.stat-title {
+  margin: 0;
+  color: #52606d;
+  font-size: 14px;
+}
+
+.stat-value {
+  margin: 6px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.stat-note {
+  margin: 4px 0 0;
+  color: #829ab1;
+  font-size: 13px;
+}
+
+/* ---------- Dashboard attention list ---------- */
+
+.attention-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.attention-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.attention-item:last-child {
+  border-bottom: none;
+}
+
+/* ---------- Status badges ---------- */
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.badge-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-low {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-out {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ---------- Products page ---------- */
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #cbd2d9;
+  border-radius: 6px;
+}
+
+.filter-select {
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #cbd2d9;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-image {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  background: #e4e7eb;
+}
+
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: 700;
+  color: #829ab1;
+}
+
+.product-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.product-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 18px;
+}
+
+.product-meta {
+  margin: 0;
+  color: #52606d;
+  font-size: 14px;
+}
+
+.product-price {
+  margin: 4px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #14532d;
+}
+
+.product-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* ---------- Low-stock table ---------- */
+
+.table-wrap {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+}
+
+.alerts-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.alerts-table th,
+.alerts-table td {
+  text-align: left;
+  padding: 11px 14px;
+  border-bottom: 1px solid #f0f4f8;
+  font-size: 14px;
+}
+
+.alerts-table th {
+  background: #f8fafc;
+  color: #52606d;
+}
+
+/* ---------- Add/Edit form ---------- */
+
+.product-form {
+  background: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334e68;
+}
+
+.product-form input,
+.product-form select {
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 400;
+  border: 1px solid #cbd2d9;
+  border-radius: 6px;
+  color: #1f2933;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.form-error {
+  margin: 0;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Small screens (phones, down to 360px) ---------- */
+
+@media (max-width: 800px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+
+  .page {
+    padding: 18px 12px 40px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+}
