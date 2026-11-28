@@ -1,0 +1,1 @@
+{"dependencies":{"cors":"^2.8.5","express":"^4.21.2"},"description":"StockTrack backend API — NextByte Studio internship, Week 3 (in-memory data store; MongoDB arrives in Week 4)","main":"src/index.js","name":"stocktrack-server","scripts":{"dev":"node --watch src/index.js","start":"node src/index.js"},"type":"module","version":"1.0.0"}
