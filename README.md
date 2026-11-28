@@ -4,7 +4,7 @@ A full-stack web application built during the **NextByte Studio Full-Stack Web D
 
 **Intern:** Abdul Malik
 **Track:** Full-Stack Web Development
-**Current status:** Week 2 — Frontend Foundation ✅
+**Current status:** Week 3 — Backend API ✅
 
 ---
 
@@ -145,7 +145,7 @@ nextbyte-fullstack-internship/
 |---|---|---|
 | 1 | Planning & repository setup | ✅ This week |
 | 2 | Frontend foundation (UI, components, demo data) | ✅ Done |
-| 3 | Backend API (endpoints, validation, error handling) | ⏳ |
+| 3 | Backend API (endpoints, validation, error handling) | ✅ Done |
 | 4 | Database & full CRUD | ⏳ |
 | 5 | Connect frontend & backend | ⏳ |
 | 6 | Authentication & quality pass | ⏳ |
@@ -179,7 +179,66 @@ client/
     └── assets/                 ← product photos (imported by demoProducts.js)
 ```
 
-## 11. How to Run
+## 11. Week 3 — Backend API ✅
+
+Built the StockTrack REST API in `server/` (Node.js + Express). All endpoints from section 6 are implemented — except auth (`/api/auth/register`, `/api/auth/login`), which is planned for Week 6.
+
+**How it works:**
+
+- **In-memory data store** (`server/src/data/store.js`) — plain JS arrays seeded with the same 8 products and 6 categories as the Week 2 frontend demo data, so both sides match exactly. Restarting the server resets the data to the seed state. MongoDB + Mongoose arrive in **Week 4**; JWT auth arrives in **Week 6**.
+- **Computed status** — every product in every response carries a `status` field computed from quantity and low-stock limit (never stored), mirroring `client/src/utils/stockStatus.js`.
+- **Validation** — invalid input returns `400` (see rules below); a duplicate SKU or category name returns `409`; an unknown product id or route returns `404`.
+- **Consistent errors** — every error, including malformed JSON bodies and unknown routes, returns the same JSON shape, never an HTML error page:
+
+```json
+{ "error": "Stock cannot go below 0 (current quantity is 2, change is -50)" }
+```
+
+**How to run:**
+
+```bash
+cd server
+npm install
+npm start          # or: npm run dev  (restarts on file changes)
+```
+
+The API listens on `http://localhost:5000` (set the `PORT` environment variable to change it). Quick check: open `http://localhost:5000/api/health` → `{ "status": "ok" }`.
+
+**Endpoints (as implemented):**
+
+| Method | Endpoint | Notes |
+|---|---|---|
+| GET | /api/health | `{ "status": "ok" }` |
+| GET | /api/products | All products with computed `status`. Optional `?search=` matches name or SKU; optional `?category=` filters by exact category name (both can combine) |
+| POST | /api/products | Creates a product → `201`. Body: `name`, `sku`, `category`, `quantity`, `unitPrice`, `lowStockLimit` (required), `supplier` (optional) |
+| GET | /api/products/low-stock | Products that are *Low Stock* or *Out of Stock* |
+| GET | /api/products/:id | One product → `404` if the id does not exist |
+| PUT | /api/products/:id | Updates only the fields sent; same validation as POST |
+| DELETE | /api/products/:id | Deletes the product and returns it |
+| POST | /api/products/:id/stock | Body: `{ "change": -5, "reason": "sale" }`. `change` must be a non-zero integer and the quantity can never go below 0. Records a StockMovement and returns the updated product |
+| GET | /api/categories | All categories |
+| POST | /api/categories | Body: `{ "name": "Frozen" }` → `201`; duplicate name → `409` |
+| GET | /api/dashboard | `{ totalProducts, lowStockCount, outOfStockCount, totalStockValue, recentActivity }` — recentActivity is the latest 5 stock movements, newest first |
+| POST | /api/auth/register, /api/auth/login | ⏳ Planned for Week 6 (not implemented yet) |
+
+**Validation rules (products):** `name`, `sku` and `category` must be non-empty strings; `sku` must be unique; `quantity` and `lowStockLimit` must be integers ≥ 0; `unitPrice` must be a number ≥ 0; `supplier` is an optional string.
+
+**Server folder structure:**
+
+```
+server/
+├── package.json
+└── src/
+    ├── index.js                  ← app setup, middleware, route mounting, error handler
+    ├── data/store.js             ← in-memory seed data (categories, products, movements)
+    ├── utils/stockStatus.js      ← computed stock status helpers
+    ├── middleware/errorHandler.js← consistent JSON errors + 404 for unknown routes
+    └── routes/                   ← products.js, categories.js, dashboard.js
+```
+
+**Evidence:** API screenshots in `screenshots/` — `week3-api-products.png`, `week3-api-low-stock.png`, `week3-api-dashboard.png`.
+
+## 12. How to Run
 
 Frontend (Week 2):
 
@@ -191,7 +250,15 @@ npm run dev
 
 Then open the local URL Vite prints (usually http://localhost:5173).
 
-Backend setup/run instructions will be added in Weeks 3–4.
+Backend (Week 3):
+
+```bash
+cd server
+npm install
+npm start
+```
+
+Then the API is available at http://localhost:5000 (see section 11 for the endpoint documentation). The frontend connects to the API in Week 5.
 
 ---
 
